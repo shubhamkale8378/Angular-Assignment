@@ -1,0 +1,44 @@
+{
+  "posts": [
+    {
+      "category": "Electronics",
+      "name": "Smartphone",
+      "price": "789",
+      "id": "524c"
+    },
+    {
+      "id": "d295",
+      "category": "Fashion",
+      "name": "T-shirt",
+      "price": "456"
+    },
+    {
+      "id": "0931",
+      "category": "Home & Kitchen",
+      "name": "Coffee Maker",
+      "price": "452"
+    },
+    {
+      "id": "56e2",
+      "category": "Health & Beauty",
+      "name": "Perfume",
+      "price": "123"
+    },
+    {
+      "id": "08f8",
+      "category": "Sports & Outdoors",
+      "name": "Running Shoes",
+      "price": "850"
+    }
+  ],
+  "comments": [
+    {
+      "id": "1",
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}

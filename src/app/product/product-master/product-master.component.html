@@ -1,0 +1,121 @@
+<p-toast></p-toast>
+
+
+
+
+
+
+<div class="contente" >
+    <div class="content">
+        <p-button (click)="showDialog()" label="Create Product" />
+    </div>
+    <div class="chart-container">
+        <canvas id="MyChart" style="margin-right: 45px;">{{ chart }}</canvas>
+    </div>
+</div>
+
+
+<div class="">
+    <p-dialog header="Product Form*" [(visible)]="visible" [modal]="true" [style]="{ width: '25vw' ,height:'27vw' }"
+        [draggable]="false" [resizable]="false">
+        <form [formGroup]="form">
+            <div class="form_group">
+                <div class="my-3">
+                    <div class="my-2"><label for="">Product Category</label></div>
+                    <div class="card flex justify-content-center">
+                        <p-dropdown [options]="products" [(ngModel)]="selectedcategory" formControlName="category"
+                            optionLabel="category" [showClear]="true" placeholder="Select a Category"></p-dropdown>
+                        <div *ngIf="form.controls['category'].touched && form.controls['category'].errors?.['required']"
+                            class="text-danger">
+                            Product Category is required
+                        </div>
+                    </div>
+                </div>
+
+                <div class="my-3">
+                    <div class="my-2"><label for="">Product Name</label></div>
+                    <div>
+                        <input class="form_control w-100" type="text" pInputText formControlName="name" />
+                        <div *ngIf="form.controls['name'].touched && form.controls['name'].errors?.['required']"
+                            class="text-danger">
+                            Product Name is required
+                        </div>
+                    </div>
+                </div>
+
+                <div class="my-3">
+                    <div class="my-2"><label for="">Product Price</label></div>
+                    <div>
+                        <input class="form_control w-100" type="text" pInputText formControlName="price" />
+                        <div *ngIf="form.controls['price'].touched && form.controls['price'].errors">
+                            <div *ngIf="form.controls['price'].errors?.['required']" class="text-danger">Product Price
+                                is
+                                required</div>
+                            <div *ngIf="form.controls['price'].errors?.['pattern']" class="text-danger">Product Price
+                                must
+                                be a
+                                valid number</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="my-3">
+                    <p-button *ngIf="isSubmit" label="Save Product" [loading]="loading"
+                        (onClick)="submitProduct()"></p-button>
+                    <p-button *ngIf="isUpdate" label="Update Product" [loading]="loading"
+                        (onClick)="updateProduct()"></p-button>
+                </div>
+            </div>
+        </form>
+    </p-dialog>
+
+    <div class="card">
+        <p-table [value]="productData" [lazy]="true" (onLazyLoad)="loadProducts($event)" dataKey="id"
+            [tableStyle]="{ 'min-width': '75rem' }" [selection]="selectedProducts" [paginator]="true" [rows]="5"
+            [totalRecords]="totalRecords" [loading]="loading" [globalFilterFields]="['category', 'name', 'price']">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th style="width: 4rem"></th>
+                    <th pSortableColumn="category">Category </th>
+                    <th pSortableColumn="name">Name </th>
+                    <th pSortableColumn="price">Price </th>
+                    <th pSortableColumn="action">Action </th>
+                </tr>
+                <tr>
+                    <th style="width: 4rem">
+                    </th>
+                    <th>
+                        <p-columnFilter type="text" field="category"></p-columnFilter>
+                    </th>
+                    <th>
+                        <p-columnFilter type="text" field="name"></p-columnFilter>
+                    </th>
+                    <th>
+                        <p-columnFilter type="text" field="price"></p-columnFilter>
+                    </th>
+                    <th></th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-product>
+                <tr>
+                    <td>
+                    </td>
+                    <td>{{ product.category }}</td>
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.price }}</td>
+                    <td>
+                        <button (click)="editAction(product)" pButton type="button" icon="pi pi-pencil"
+                            class="p-button-rounded p-button-text"></button>
+                        <button (click)="deleteAction(product)" pButton type="button" icon="pi pi-trash"
+                            class="p-button-rounded p-button-text p-button-danger"></button>
+                    </td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+                <tr>
+                    <td colspan="5">No data found.</td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div>

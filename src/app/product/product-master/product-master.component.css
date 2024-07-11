@@ -1,0 +1,30 @@
+.my-3 {
+    margin: 15px 0;
+}
+
+.my-2 {
+    margin: 10px 0;
+}
+
+.text-danger {
+    color: red;
+}
+
+::ng-deep .p-dropdown-items {
+    list-style-type: none;
+    font-size: 14px;
+}
+
+::ng-deep .p-dropdown-panel .p-dropdown-items .p-dropdown-item {
+    padding: 0.5rem 1.25rem;
+    margin: 0;
+}
+
+.chart-container {
+    width: 500px;
+}
+
+.contente {
+    display: flex;
+    justify-content: space-between;
+}
